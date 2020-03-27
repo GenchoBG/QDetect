@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using QDetect.Data;
 
 namespace QDetect.Web
 {
@@ -21,6 +23,12 @@ namespace QDetect.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services
+                .AddEntityFrameworkSqlServer()
+                .AddDbContext<QDetectDbContext>((serviceProvider, options) =>
+                    options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"))
+                        .UseInternalServiceProvider(serviceProvider));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
