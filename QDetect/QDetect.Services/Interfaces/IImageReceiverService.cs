@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QDetect.Services.Interfaces
 {
     public interface IImageReceiverService
     {
-        void Process(string link, List<List<double>> embeddings);
+        Task Process(string link, List<List<double>> embeddings);
     }
 }
