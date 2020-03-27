@@ -5,6 +5,6 @@ namespace QDetect.Services.Interfaces
 {
     public interface IImageReceiverService
     {
-        Task Process(string link, List<List<double>> embeddings);
+        Task Process(string link, IList<IList<double>> embeddings);
     }
 }

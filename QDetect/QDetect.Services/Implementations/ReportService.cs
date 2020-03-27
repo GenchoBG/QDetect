@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QDetect.Data;
 using QDetect.Data.Models;
@@ -16,14 +17,14 @@ namespace QDetect.Services.Implementations
             this.context = context;
         }
 
-        public Report Add(int personId, int imageId)
+        public async Task<Report> AddAsync(int personId, int imageId)
         {
-            if (!context.Persons.Any(p => p.Id == personId))
+            if (!await context.Persons.AnyAsync(p => p.Id == personId))
             {
                 throw new ArgumentException("Invalid person id");
             }
 
-            if (!context.Images.Any(i => i.Id == imageId))
+            if (!await context.Images.AnyAsync(i => i.Id == imageId))
             {
                 throw new ArgumentException("Invalid image id");
             }
@@ -38,37 +39,37 @@ namespace QDetect.Services.Implementations
                 IsArchived = false,
             };
 
-            context.Reports.Add(report);
-            context.SaveChanges();
+            await context.Reports.AddAsync(report);
+            await context.SaveChangesAsync();
 
             return report;
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            if (!context.Reports.Any(r => r.Id == id))
+            if (!await context.Reports.AnyAsync(r => r.Id == id))
             {
                 throw new ArgumentException("Invalid report id");
             }
 
-            var report = context.Reports.First(r => r.Id == id);
+            var report = await context.Reports.FirstAsync(r => r.Id == id);
 
             context.Reports.Remove(report);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void Archive(int id)
+        public async Task ArchiveAsync(int id)
         {
-            if (!context.Reports.Any(r => r.Id == id))
+            if (!await context.Reports.AnyAsync(r => r.Id == id))
             {
                 throw new ArgumentException("Invalid report id");
             }
 
-            var report = context.Reports.First(r => r.Id == id);
+            var report = await context.Reports.FirstAsync(r => r.Id == id);
             report.IsArchived = true;
 
             context.Reports.Update(report);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
         public IQueryable<Report> GetByPersonId(int personId)
