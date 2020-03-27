@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QDetect.Data.Models
 {
@@ -8,10 +6,12 @@ namespace QDetect.Data.Models
     {
         public int PersonId { get; set; }
 
+        [Required]
         public Person Person { get; set; }
 
         public int ImageId { get; set; }
 
+        [Required]
         public Image Image { get; set; }
     }
 }

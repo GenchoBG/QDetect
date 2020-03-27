@@ -51,6 +51,8 @@ namespace QDetect.Services.Implementations
                         });
                     }
 
+                    image.Embeddings.Add(embeddingRecord);
+
                     var report = new Report()
                     {
                         Date = DateTime.Now,
@@ -58,6 +60,12 @@ namespace QDetect.Services.Implementations
                         IsArchived = false,
                         Person = person
                     };
+
+                    person.Images.Add(new PersonImage()
+                    {
+                        Person = person,
+                        Image = image
+                    });
 
                     await this.db.Reports.AddAsync(report);
                     await this.db.SaveChangesAsync();
