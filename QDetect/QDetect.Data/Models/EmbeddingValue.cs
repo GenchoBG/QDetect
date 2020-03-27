@@ -1,4 +1,6 @@
-﻿namespace QDetect.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QDetect.Data.Models
 {
     public class EmbeddingValue
     {
