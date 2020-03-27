@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace QDetect.Data.Models
+﻿namespace QDetect.Data.Models
 {
     public class EmbeddingValue
     {
