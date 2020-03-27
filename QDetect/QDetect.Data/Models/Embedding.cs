@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace QDetect.Data.Models
 {
-    public class Report
+    public class Embedding
     {
         public int Id { get; set; }
 
@@ -12,13 +14,11 @@ namespace QDetect.Data.Models
         [Required]
         public Image Image { get; set; }
 
-        public DateTime Date { get; set; }
-
         public int PersonId { get; set; }
         
         [Required]
         public Person Person { get; set; }
 
-        public bool IsArchived { get; set; }
+        public ICollection<EmbeddingValue> Values { get; set; } = new HashSet<EmbeddingValue>();
     }
 }

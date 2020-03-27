@@ -8,4 +8,8 @@
     <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QDetect.Data\QDetect.Data.csproj" />
+  </ItemGroup>
+
 </Project>

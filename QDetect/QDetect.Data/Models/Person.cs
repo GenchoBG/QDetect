@@ -23,6 +23,6 @@ namespace QDetect.Data.Models
 
         public ICollection<Report> Reports { get; set; } = new HashSet<Report>();
 
-        public ICollection<Image> Images { get; set; } = new HashSet<Image>();
+        public ICollection<PersonImage> Images { get; set; } = new HashSet<PersonImage>();
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace QDetect.Data.Models
 {
@@ -12,11 +10,6 @@ namespace QDetect.Data.Models
         [Required]
         public string Link { get; set; }
 
-        [Required]
-        public int PersonId { get; set; }
-
-        public Person Person { get; set; }
-
-        public ICollection<EmbeddingValue> Values { get; set; } = new HashSet<EmbeddingValue>();
+        public ICollection<Embedding> Embeddings { get; set; } = new HashSet<Embedding>();
     }
 }

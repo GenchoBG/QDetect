@@ -15,9 +15,28 @@ namespace QDetect.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("QDetect.Data.Models.Embedding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ImageId");
+
+                    b.Property<int>("PersonId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("Embeddings");
+                });
 
             modelBuilder.Entity("QDetect.Data.Models.EmbeddingValue", b =>
                 {
@@ -47,13 +66,9 @@ namespace QDetect.Data.Migrations
                     b.Property<string>("Link")
                         .IsRequired();
 
-                    b.Property<int>("PersonId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Embeddings");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("QDetect.Data.Models.Person", b =>
@@ -79,6 +94,19 @@ namespace QDetect.Data.Migrations
                     b.ToTable("Persons");
                 });
 
+            modelBuilder.Entity("QDetect.Data.Models.PersonImage", b =>
+                {
+                    b.Property<int>("ImageId");
+
+                    b.Property<int>("PersonId");
+
+                    b.HasKey("ImageId", "PersonId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("PersonImage");
+                });
+
             modelBuilder.Entity("QDetect.Data.Models.Report", b =>
                 {
                     b.Property<int>("Id")
@@ -87,7 +115,9 @@ namespace QDetect.Data.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Image");
+                    b.Property<int>("ImageId");
+
+                    b.Property<int>("ImageId1");
 
                     b.Property<bool>("IsArchived");
 
@@ -95,33 +125,65 @@ namespace QDetect.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ImageId");
+
+                    b.HasIndex("ImageId1");
+
                     b.HasIndex("PersonId");
 
                     b.ToTable("Reports");
                 });
 
-            modelBuilder.Entity("QDetect.Data.Models.EmbeddingValue", b =>
+            modelBuilder.Entity("QDetect.Data.Models.Embedding", b =>
                 {
-                    b.HasOne("QDetect.Data.Models.Image", "Embedding")
-                        .WithMany("Values")
-                        .HasForeignKey("EmbeddingId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.HasOne("QDetect.Data.Models.Image", "Image")
+                        .WithMany("Embeddings")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("QDetect.Data.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("QDetect.Data.Models.Image", b =>
+            modelBuilder.Entity("QDetect.Data.Models.EmbeddingValue", b =>
                 {
+                    b.HasOne("QDetect.Data.Models.Embedding", "Embedding")
+                        .WithMany("Values")
+                        .HasForeignKey("EmbeddingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QDetect.Data.Models.PersonImage", b =>
+                {
+                    b.HasOne("QDetect.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("QDetect.Data.Models.Person", "Person")
                         .WithMany("Images")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("QDetect.Data.Models.Report", b =>
                 {
+                    b.HasOne("QDetect.Data.Models.Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("QDetect.Data.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId1")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("QDetect.Data.Models.Person", "Person")
                         .WithMany("Reports")
                         .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
