@@ -64,6 +64,10 @@ $(document).ready(() => {
         input.one('blur', save).focus();
 
     });
+
+    $("#modalReported").on("click", () => {
+        window.location.href = "/Report/Index?id=" + $("#modalPersonId").text();
+    });
 });
 
 function openModal(person) {
