@@ -63,8 +63,12 @@ body {
     color: #F38181;
 }
 
-.submitBtn:hover {
-    background-color: #F38181;
-    color: #fefaec;
-    border-color: #f38181;
-}
+    .submitBtn:hover, .submitBtn:not(:disabled):not(.disabled):active {
+        background-color: #F38181;
+        color: #fefaec;
+        border-color: #f38181;
+    }
+
+    .submitBtn:focus, .submitBtn:not(:disabled):not(.disabled):active:focus {
+        box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
+    }

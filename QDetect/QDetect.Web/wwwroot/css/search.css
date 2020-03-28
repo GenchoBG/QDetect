@@ -5,3 +5,25 @@
 .not-reported {
     background-color: rgba(0, 255, 0, 0.2);
 }
+
+#modalImage {
+    width: 60%;
+}
+
+#modalInfo tr {
+    display: block;
+    float: left;
+}
+
+#modalInfo th, #modalInfo td {
+    display: block;
+    width: 100%;
+}
+
+#modalInfo td {
+    text-align: right;
+}
+
+#modalInfo p{
+    margin-bottom: 0;
+}
