@@ -1,0 +1,360 @@
+﻿#faceForm {
+    margin: 5% auto 0;
+    height: 90%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#form-header {
+    width: 100%;
+    height: 100%;
+}
+
+#form-header-content {
+    text-align: center;
+    padding: 5%;
+    width: 100%;
+    height: 100%;
+    /* top: 50%; */
+    /* transform: translateY(-50%); */
+}
+
+#faceFile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: whitesmoke;
+    background-color: lightsalmon;
+    display: inline-block;
+    padding: 5px 20px;
+    border: 0.1px solid darksalmon;
+    -ms-border-radius: 25px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.thumbnail {
+    max-height: 300px;
+    max-width: 600px;
+}
+
+ion-icon {
+    width: 25px !important;
+    height: 25px !important;
+    margin: 1px 10px -5px 0;
+}
+
+#faceFile:focus + label,
+#faceFile + label:hover {
+    background-color: darksalmon;
+}
+
+.polaroid {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 25px;
+}
+
+.polaroid-container {
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.modal-body > div > * {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.lds-roller {
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+    .lds-roller div {
+        -ms-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        -ms-transform-origin: 40px 40px;
+        -o-transform-origin: 40px 40px;
+        -webkit-transform-origin: 40px 40px;
+        transform-origin: 40px 40px;
+    }
+
+        .lds-roller div:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            background: #cef;
+            margin: -4px 0 0 -4px;
+        }
+
+        .lds-roller div:nth-child(1) {
+            -webkit-animation-delay: -0.036s;
+            animation-delay: -0.036s;
+        }
+
+            .lds-roller div:nth-child(1):after {
+                top: 63px;
+                left: 63px;
+            }
+
+        .lds-roller div:nth-child(2) {
+            -webkit-animation-delay: -0.072s;
+            animation-delay: -0.072s;
+        }
+
+            .lds-roller div:nth-child(2):after {
+                top: 68px;
+                left: 56px;
+            }
+
+        .lds-roller div:nth-child(3) {
+            -webkit-animation-delay: -0.108s;
+            animation-delay: -0.108s;
+        }
+
+            .lds-roller div:nth-child(3):after {
+                top: 71px;
+                left: 48px;
+            }
+
+        .lds-roller div:nth-child(4) {
+            -webkit-animation-delay: -0.144s;
+            animation-delay: -0.144s;
+        }
+
+            .lds-roller div:nth-child(4):after {
+                top: 72px;
+                left: 40px;
+            }
+
+        .lds-roller div:nth-child(5) {
+            -webkit-animation-delay: -0.18s;
+            animation-delay: -0.18s;
+        }
+
+            .lds-roller div:nth-child(5):after {
+                top: 71px;
+                left: 32px;
+            }
+
+        .lds-roller div:nth-child(6) {
+            -webkit-animation-delay: -0.216s;
+            animation-delay: -0.216s;
+        }
+
+            .lds-roller div:nth-child(6):after {
+                top: 68px;
+                left: 24px;
+            }
+
+        .lds-roller div:nth-child(7) {
+            -webkit-animation-delay: -0.252s;
+            animation-delay: -0.252s;
+        }
+
+            .lds-roller div:nth-child(7):after {
+                top: 63px;
+                left: 17px;
+            }
+
+        .lds-roller div:nth-child(8) {
+            -webkit-animation-delay: -0.288s;
+            animation-delay: -0.288s;
+        }
+
+            .lds-roller div:nth-child(8):after {
+                top: 56px;
+                left: 12px;
+            }
+
+@keyframes lds-roller {
+    0% {
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -ms-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+#successResult > h4 {
+    margin-bottom: 3%;
+}
+
+@media (max-width: 575px) {
+    #heading {
+        font-size: 2em;
+    }
+
+    #faceForm {
+        width: 40%;
+    }
+
+    label[for=faceFile] {
+        padding: 2% !important;
+        width: 40%;
+        font-size: 0.5em !important;
+    }
+
+    ion-icon {
+        display: none;
+    }
+
+    #submitBtn {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 576px) {
+    #heading {
+        font-size: 2em;
+    }
+
+    #faceForm {
+        width: 40%;
+    }
+
+    label[for=faceFile] {
+        padding: 2% !important;
+        width: 40%;
+        font-size: 0.5em !important;
+    }
+
+    ion-icon {
+        display: none;
+    }
+
+    .thumbnail {
+        max-height: 103px;
+        max-width: 206px;
+    }
+
+    #submitBtn {
+        font-size: 0.5em;
+    }
+}
+
+@media (min-width: 768px) {
+    #heading {
+        font-size: 2.5em;
+    }
+
+    #faceForm {
+        width: 45%;
+    }
+
+    label[for=faceFile] {
+        width: 50%;
+        font-size: 0.7em !important;
+    }
+
+    ion-icon {
+        display: inline-block;
+        width: 15px !important;
+        height: 15px !important;
+        margin-bottom: -2%;
+    }
+
+    .thumbnail {
+        max-height: 157.5px;
+        max-width: 315px;
+    }
+
+    #submitBtn {
+        font-size: 0.7em;
+    }
+}
+
+@media (min-width: 992px) {
+    #heading {
+        font-size: 4em;
+    }
+
+    #faceForm {
+        width: 50%;
+    }
+
+    label[for=faceFile] {
+        width: 60%;
+        font-size: 0.75em !important;
+    }
+
+    ion-icon {
+        display: inline-block;
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .thumbnail {
+        max-height: 235px;
+        max-width: 470px;
+    }
+
+    #submitBtn {
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1200px) {
+    #heading {
+        font-size: 4.8em;
+    }
+
+    #faceForm {
+        width: 55%;
+    }
+
+    label[for=faceFile] {
+        width: 60%;
+        font-size: 1.25em !important;
+    }
+
+    ion-icon {
+        display: inline-block;
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    #submitBtn {
+        font-size: 1.5em;
+    }
+}
+
+@media (min-width: 1600px) {
+    #heading {
+        font-size: 5.5em;
+    }
+
+    #faceForm {
+        width: 70%;
+    }
+
+    label[for=faceFile] {
+        width: 70%;
+        font-size: 2.25em !important;
+    }
+
+    ion-icon {
+        display: inline-block;
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    #submitBtn {
+        font-size: 2.5em;
+    }
+}

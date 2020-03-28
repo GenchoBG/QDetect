@@ -21,7 +21,7 @@ namespace QDetect.Services.Implementations
             this.db = db;
         }
 
-        public async Task Process(string link, IList<IList<double>> embeddings)
+        public async Task ProcessAsync(string link, IList<IList<double>> embeddings)
         {
             var image = new Image()
             {

@@ -45,7 +45,7 @@ namespace QDetect.Web
                 this.Configuration["Cloudinary:ApiSecret"]);
 
             Cloudinary cloudinaryUtility = new Cloudinary(cloudinaryCredentials);
-
+            services.AddSingleton(cloudinaryUtility);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
