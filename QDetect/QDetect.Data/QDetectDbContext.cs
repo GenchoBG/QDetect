@@ -9,6 +9,8 @@ namespace QDetect.Data
 
         public DbSet<Report> Reports { get; set; }
 
+        public DbSet<PersonImage> PeopleImages { get; set; }
+
         public DbSet<Image> Images { get; set; }
 
         public DbSet<Embedding> Embeddings { get; set; }
@@ -60,6 +62,17 @@ namespace QDetect.Data
 
             modelBuilder.Entity<PersonImage>()
                 .HasKey(pi => new { pi.ImageId, pi.PersonId });
+
+            modelBuilder.Entity<PersonImage>()
+                .HasOne(pi => pi.Person)
+                .WithMany(p => p.Images)
+                .HasForeignKey(pi => pi.PersonId);
+
+            modelBuilder.Entity<PersonImage>()
+                .HasOne(pi => pi.Image)
+                .WithMany(i => i.Persons)
+                .HasForeignKey(pi => pi.ImageId);
+
         }
     }
 }
