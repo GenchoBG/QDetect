@@ -19,7 +19,31 @@ namespace QDetect.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string searchQuery)
+        public async Task<IActionResult> Index()
+        {
+            var people = this.peopleService.GetAll().ToList();
+
+            var peopleModel = new PeopleListingPageViewModel();
+
+            foreach (var person in people)
+            {
+                peopleModel.Peoples.Append(new PeopleViewModel()
+                {
+                    Name = person.Name,
+                    City = person.City,
+                    HasReports = person.Reports.Count > 0,
+                    Id = person.Id,
+                    Image = this.peopleService.GetPersonImageLink(person.Id).Result,
+                    QuarantineEndDate = person.QuarantineEndDate.ToShortTimeString(),
+                    UCN = person.UCN
+                });
+            }
+
+            return this.View(peopleModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchQuery)
         {
             var people = this.peopleService.GetAll()
                 .Where(p => p.Name.Contains(searchQuery) || p.UCN.StartsWith(searchQuery)).ToList();
@@ -28,7 +52,7 @@ namespace QDetect.Web.Controllers
 
             foreach (var person in people)
             {
-                peopleModel.Peoples.Append(new PeopleViewModel()
+                peopleModel.Peoples.ToList().Add(new PeopleViewModel()
                 {
                     Name = person.Name,
                     City = person.City,
