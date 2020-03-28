@@ -9,8 +9,11 @@ a.navbar-brand {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
+html, body {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #625772;
+    background-color: #FEFAEC;
 }
 @media (min-width: 768px) {
   html {
