@@ -10,7 +10,7 @@
         <div class="input-group mx-auto w-50">
             <input type="text" class="form-control" id="searchInput" placeholder="Search by name or ID" name="searchQuery">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-outline-warning submitBtn">Search</button>
+                <button type="submit" class="btn btn-outline-warning submitBtn" id="search-btn">Search</button>
             </div>
         </div>
     </form>
@@ -19,31 +19,38 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">ID</th>
-            <th scope="col">City</th>
-            <th scope="col">Quarantined until</th>
-            <th scope="col">Details</th>
-        </tr>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        <th scope="col">City</th>
+        <th scope="col">Quarantined until</th>
+        <th scope="col">Details</th>
+    </tr>
     </thead>
-    <tbody>
-        @foreach (var person in Model.People)
-        {
-            <tr class="@(person.HasReports ? "reported":"not-reported")" id="table-tr-@person.Id">
-                <td id="personName">@person.Name</td>
-                <td id="personUCN">@person.UCN</td>
-                <td id="personCity">@person.City</td>
-                <td id="personQuarantine">@person.QuarantineEndDate</td>
-                <td>
-                    <button onclick='openModal(@Html.Raw(Json.Serialize(person)))' type="button" class="btn btn-outline-warning submitBtn" data-toggle="modal" data-target="#modal">
-                        Details
-                    </button>
-                </td>
-            </tr>
-        }
+    <tbody id="results">
+    @foreach (var person in Model.People)
+    {
+        <tr class="@(person.HasReports ? "reported":"not-reported")" id="table-tr-@person.Id" hidden>
+            <td id="personName">@person.Name</td>
+            <td id="personUCN">@person.UCN</td>
+            <td id="personCity">@person.City</td>
+            <td id="personQuarantine">@person.QuarantineEndDate</td>
+            <td>
+                <button onclick='openModal(@Html.Raw(Json.Serialize(person)))' type="button" class="btn btn-outline-warning submitBtn" data-toggle="modal" data-target="#modal">
+                    Details
+                </button>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+<div class="row justify-content-center">
+    <div id="search-navigation">
+        <button id="prev-arrow" class="btn" onclick="navigatePrevious()"><</button>
+        <button id="next-arrow" class="btn" onclick="navigateNext()">></button>
+    </div>
+</div>
+
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

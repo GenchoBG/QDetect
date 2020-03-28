@@ -24,6 +24,20 @@
     text-align: right;
 }
 
-#modalInfo p{
+#modalInfo p {
     margin-bottom: 0;
 }
+
+#search-navigation button {
+    background-color: #f38181;
+    color: #FEFAEC
+}
+
+    #search-navigation button:active, #search-navigation button:hover {
+        background-color: #f56868;
+        color: #FEFAEC;
+    }
+
+    #search-navigation button:active {
+        box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
+    }
