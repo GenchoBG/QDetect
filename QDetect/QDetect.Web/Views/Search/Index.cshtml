@@ -1,0 +1,27 @@
+﻿@using QDetect.Data.Models
+@model PeopleListingPageViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">ID</th>
+            <th scope="col">City</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.Peoples)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.UCN</td>
+                <td>@person.City</td>
+            </tr>
+        }
+    </tbody>
+</table>

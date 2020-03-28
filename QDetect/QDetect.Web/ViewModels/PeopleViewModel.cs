@@ -16,7 +16,7 @@ namespace QDetect.Web.ViewModels
 
         public string City { get; set; }
 
-        public string QuanratineEndDate { get; set; }
+        public string QuarantineEndDate { get; set; }
 
         public string Image { get; set; }
 

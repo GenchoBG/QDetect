@@ -135,7 +135,7 @@ function dropHandler(ev) {
             }
         }
     }
-    fileHandler();
+    fileHandler(ev);
 }
 
 function checkPicture(e) {

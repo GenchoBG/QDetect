@@ -48,7 +48,7 @@ namespace QDetect.Web.Controllers
                 Id = p.Id,
                 Name = p.Name,
                 City = p.City,
-                QuanratineEndDate = p.QuarantineEndDate.ToLocalTime().ToString(),
+                QuarantineEndDate = p.QuarantineEndDate.ToLocalTime().ToString(),
                 UCN = p.UCN,
                 HasReports = p.Reports.Any()
             }).ToListAsync();
