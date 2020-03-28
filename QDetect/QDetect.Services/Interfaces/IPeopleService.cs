@@ -15,5 +15,9 @@ namespace QDetect.Services.Interfaces
         Task<Person> GetAsync(int id);
 
         IQueryable<Person> GetAll();
+
+        Task<string> GetPersonImageLink(int id);
+
+        Task<bool> ContainsUser(int id);
     }
 }
