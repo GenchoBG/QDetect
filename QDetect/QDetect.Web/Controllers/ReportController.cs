@@ -22,9 +22,9 @@ namespace QDetect.Web.Controllers
         }
 
         [HttpPost]
-        public Task<IActionResult> Create(int personId, int imageId)
+        public async Task<IActionResult> Create(int personId, int imageId)
         {
-            return this.View();
+            return this.Json("a");
         }
 
     }

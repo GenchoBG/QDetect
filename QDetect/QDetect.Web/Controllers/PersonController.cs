@@ -26,10 +26,26 @@ namespace QDetect.Web.Controllers
             return this.View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Upload(PersonUploadBindingModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest();
+            }
+
+            var link = await this.cloudinaryService.UploadPictureAsync(model.Image, Guid.NewGuid().ToString());
+
+            var person = await this.peopleService.AddAsync(model.Name, link, model.UCN, model.City, model.Embedding, model.Quarantine);
+
+            return this.Ok(person);
+        }
+
         public async Task<IActionResult> All()
         {
             var peoples = await peopleService.GetAll().Select(p => new PeopleViewModel
             {
+                Id = p.Id,
                 Name = p.Name,
                 City = p.City,
                 Image = p.Images.FirstOrDefault().Image.Link,
@@ -45,20 +61,29 @@ namespace QDetect.Web.Controllers
             return this.View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Upload(PersonUploadBindingModel model)
+        public async Task<IActionResult> Info(int id)
         {
-            if (!this.ModelState.IsValid)
+            try
             {
-                return this.BadRequest();
+                var person = await peopleService.GetAsync(id);
+
+                var viewModel = new PeopleViewModel
+                {
+                    Id = person.Id,
+                    City = person.City,
+                    HasReports = person.Reports.Any(),
+                    Image = person.Images.FirstOrDefault().Image.Link,
+                    Name = person.Name,
+                    QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToString(),
+                    UCN = person.UCN
+                };
+
+                return View(viewModel);
             }
-
-            var link = await this.cloudinaryService.UploadPictureAsync(model.Image, Guid.NewGuid().ToString());
-
-            var person = await this.peopleService.AddAsync(model.Name, link, model.UCN, model.City, model.Embedding, model.Quarantine);
-
-            return this.Ok(person);
-
+            catch (ArgumentException e)
+            {
+                return Redirect("/Home/Index");
+            }
         }
     }
 }
