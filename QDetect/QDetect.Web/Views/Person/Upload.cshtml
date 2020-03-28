@@ -3,7 +3,7 @@
     ViewData["Title"] = "UploadView";
 }
 
-<link rel="stylesheet" href="css/faces.css" />
+<link rel="stylesheet" href="~/css/faces.css" />
 
 <h1 class="display-2 text-center" id="heading">Who are you looking for?</h1>
 
@@ -16,69 +16,37 @@
             </div>
         </div>
     </div>
-    <div class="polaroid-container">
-        <input class="btn btn-outline-success btn-lg" id="submitBtn" type="submit" value="Find them!" />
+    
+    <h3 id="uploadInfo"></h3>
+    
+    <div class="form-group">
+        <label for="fullName">Full name</label>
+        <input type="text" class="form-control" id="fullName" aria-describedby="namesHelp" placeholder="Enter their names">
+    </div>
+    
+    <div class="form-group">
+        <label for="ucn">National identification number</label>
+        <input type="text" class="form-control" id="ucn" aria-describedby="ucnHelp" placeholder="National identification number">
+    </div>
+    
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" aria-describedby="cityHelp" placeholder="City">
+    </div>
+    
+    <div class="form-group">
+        <label for="quarantine">Quarantine</label>
+        <input type="date" class="form-control" id="quarantine" aria-describedby="quarantineHelp" placeholder="Until when are they quarantined">
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-outline-info" id="submitBtn">Add person</button>
+        </div>
     </div>
 </form>
 
-<button id="toggleResult" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" hidden>Large modal</button>
 
-<div id="faceModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Results</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="banner">
-                    <h3 class="display-3">Processing...</h3>
-                    <div class="lds-roller">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-                <div id="nothingFound">
-                    <h3 class="display-3">Sorry, no face found!</h3>
-                </div>
-                <div id="nothingFoundDb">
-                    <h3 class="display-3">Sorry, no such face present in the database!</h3>
-                </div>
-                <div id="moreThanOne">
-                    <h3 class="display-3">You'd better read the instruction manual! <br />More than one face found!</h3>
-                </div>
-                <div id="successResult">
-                    <h4 class="display-4">Here is what we found:</h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Posts</th>
-                                </tr>
-                            </thead>
-                            <tbody id="posts"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div id="error">
-                    <h2 class="display-2 font-weight-bold">INVALID FILE FORMAT</h2>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section Scripts{
     <script src="/js/faces.js"></script>

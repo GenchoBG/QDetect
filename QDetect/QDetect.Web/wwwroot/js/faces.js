@@ -5,99 +5,6 @@ $(document).ready(() => {
     $("#faceFile").change(function () {
         handleFileSelect();
     });
-
-    $("#faceModal").on("hide.bs.modal", function () {
-        $("#exampleModalCenterTitle").text("Results");
-    });
-
-    $("#faceForm").submit(function (e) {
-        e.preventDefault();
-
-        var banner = $("#banner");
-
-        $("#posts").empty();
-        $(".modal-body").children().hide();
-        banner.show();
-
-        $("#toggleResult").trigger("click");
-
-        const facesApiUrl = "http://94.156.180.190:80/getembeddings";
-        var formData = new FormData();
-        formData.append('face', file);
-        console.log("FACE: ", file);
-
-        if (!valid) {
-            return;
-        }
-
-        $.ajax({
-            url: facesApiUrl,
-            method: "post",
-            data: formData,
-            contentType: false,
-            processData: false,
-            crossDomain: true,
-            cache: false,
-            success: function (embeddings) {
-                if (embeddings.length === 0) {
-                    $("#exampleModalCenterTitle").text("ERROR");
-
-                    console.log('No face found!');
-                    banner.hide();
-                    $("#nothingFound").show();
-                } else if (embeddings.length !== 1) {
-                    $("#exampleModalCenterTitle").text("ERROR");
-
-                    console.log('More than one face found!');
-                    banner.hide();
-                    $("#moreThanOne").show();
-                } else {
-                    $.ajax({
-                        method: "post",
-                        url: '/Home/SearchFace',
-                        data: {
-                            embedding: embeddings[0]
-                        },
-                        success: function (posts) {
-                            banner.hide();
-                            if (posts.length === 0) {
-                                $("#nothingFoundDb").show();
-                            } else {
-                                $("#successResult").show();
-                                var postsTable = $("#posts");
-                                var i = 1;
-                                for (let post of posts) {
-                                    postsTable.append($(`<tr>
-                                                        <th scope="row">${i}</th>
-                                                        <td><a href="${post.link}">${post.link}</a></td>
-                                                    </tr>`));
-                                    console.log(post.link);
-                                    i++;
-                                }
-                            }
-
-                        },
-                        error: function (req, status, err) {
-                            console.log("something went wrong");
-                            console.log(status);
-                            console.log(err);
-                            console.log(req);
-                        }
-                    });
-
-                    console.log('All is good! One face found');
-                }
-
-                console.log(embeddings);
-            },
-            error: function (req, status, err) {
-                console.log("something went wrong");
-                console.log(status);
-                console.log(err);
-                console.log(req);
-            }
-        });
-    });
 });
 
 function isValid() {
@@ -189,6 +96,53 @@ function dropHandler(ev) {
         }
     }
     fileHandler();
+
+    checkPicture(ev);
+}
+
+function checkPicture(e) {
+    e.preventDefault();
+
+    const facesApiUrl = "http://94.156.180.190:80/getembeddings";
+    var formData = new FormData();
+    formData.append('face', file);
+    console.log("FACE: ", file);
+
+    if (!valid) {
+        return;
+    }
+
+    $.ajax({
+        url: facesApiUrl,
+        method: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        crossDomain: true,
+        cache: false,
+        success: function (embeddings) {
+            if (embeddings.length === 0) {
+                $("#uploadInfo").text("No face found");
+
+                console.log('No face found!');
+            } else if (embeddings.length !== 1) {
+                $("#uploadInfo").text("More than one face found");
+
+                console.log('More than one face found!');
+            } else {
+                $("#uploadInfo").text("Everything's perfect");
+            }
+
+            console.log(embeddings);
+        },
+        error: function (req, status, err) {
+            $("#uploadInfo").text("Something went wrong");
+            console.log("something went wrong");
+            console.log(status);
+            console.log(err);
+            console.log(req);
+        }
+    });
 }
 
 function dragOverHandler(ev) {

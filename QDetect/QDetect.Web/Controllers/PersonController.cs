@@ -48,11 +48,15 @@ namespace QDetect.Web.Controllers
                 Id = p.Id,
                 Name = p.Name,
                 City = p.City,
-                Image = p.Images.FirstOrDefault().Image.Link,
                 QuanratineEndDate = p.QuarantineEndDate.ToLocalTime().ToString(),
                 UCN = p.UCN,
                 HasReports = p.Reports.Any()
             }).ToListAsync();
+
+            foreach (var person in peoples)
+            {
+                person.Image = await peopleService.GetPersonImageLink(person.Id);
+            }
 
             var viewModel = new PeopleListingPageViewModel();
 
@@ -61,6 +65,7 @@ namespace QDetect.Web.Controllers
             return this.View(viewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Info(int id)
         {
             try
@@ -90,6 +95,21 @@ namespace QDetect.Web.Controllers
             {
                 return Redirect("/Home/Index");
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(PersonInfoBindingModel input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Redirect($"/People/Info?id={input.Id}");
+            }
+
+            var newDate = DateTime.Parse(input.QuarantineEndDate);
+
+            await peopleService.EditAsync(input.Id, input.Name, input.UCN, input.City, newDate);
+
+            return Redirect($"/People/Info?id={input.Id}");
         }
     }
 }
