@@ -68,33 +68,31 @@ namespace QDetect.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Info(int id)
         {
-            try
-            {
-                var person = await peopleService.GetAsync(id);
-
-                var viewModel = new PeopleInfoViewModel
-                {
-                    Id = person.Id,
-                    City = person.City,
-                    HasReports = person.Reports.Any(),
-                    Image = person.Images.FirstOrDefault().Image.Link,
-                    Name = person.Name,
-                    QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToString(),
-                    UCN = person.UCN
-                };
-
-                viewModel.Reports = person.Reports.Select(r => new ReportViewModel
-                {
-                    Id = r.Id,
-                    ImageLink = r.Image.Link
-                }).ToList();
-
-                return View(viewModel);
-            }
-            catch (ArgumentException e)
+            if (!await peopleService.ContainsUserAsync(id))
             {
                 return Redirect("/Home/Index");
             }
+
+            var person = await peopleService.GetAsync(id);
+
+            var viewModel = new PeopleInfoViewModel
+            {
+                Id = person.Id,
+                City = person.City,
+                HasReports = person.Reports.Any(),
+                Image = person.Images.FirstOrDefault().Image.Link,
+                Name = person.Name,
+                QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToString(),
+                UCN = person.UCN
+            };
+
+            viewModel.Reports = person.Reports.Select(r => new ReportViewModel
+            {
+                Id = r.Id,
+                ImageLink = r.Image.Link
+            }).ToList();
+
+            return View(viewModel);
         }
 
         [HttpPost]
