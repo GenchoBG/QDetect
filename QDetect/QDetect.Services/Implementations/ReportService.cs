@@ -17,6 +17,11 @@ namespace QDetect.Services.Implementations
             this.context = context;
         }
 
+        public Task<bool> ContainsAsync(int id)
+        {
+            return context.Reports.AnyAsync(r => r.Id == id);
+        }
+
         public async Task<Report> AddAsync(int personId, int imageId)
         {
             if (!await context.Persons.AnyAsync(p => p.Id == personId))
