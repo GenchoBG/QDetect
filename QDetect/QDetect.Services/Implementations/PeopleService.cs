@@ -71,7 +71,7 @@ namespace QDetect.Services.Implementations
 
         public async Task EditAsync(int id, string name, string ucn, string city, DateTime quarantine)
         {
-            if (!await context.Persons.AnyAsync(p => p.Id == id))
+            if (!await ContainsUser(id))
             {
                 throw new ArgumentException("Invalid person id");
             }
@@ -89,7 +89,7 @@ namespace QDetect.Services.Implementations
 
         public async Task<Person> GetAsync(int id)
         {
-            if (!await context.Persons.AnyAsync(p => p.Id == id))
+            if (!await ContainsUser(id))
             {
                 throw new ArgumentException("Invalid person id");
             }
@@ -100,6 +100,23 @@ namespace QDetect.Services.Implementations
         public IQueryable<Person> GetAll()
         {
             return context.Persons;
+        }
+
+        public async Task<string> GetPersonImageLink(int id)
+        {
+            if (!await ContainsUser(id))
+            {
+                throw new ArgumentException("Invalid person id");
+            }
+
+            var person = await context.Persons.FirstAsync(p => p.Id == id);
+
+            return person.Images.FirstOrDefault().Image.Link;
+        }
+
+        public async Task<bool> ContainsUser(int id)
+        {
+            return await context.Persons.AnyAsync(p => p.Id == id);
         }
     }
 }

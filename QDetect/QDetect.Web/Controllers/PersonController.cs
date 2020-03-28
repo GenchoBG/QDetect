@@ -48,11 +48,15 @@ namespace QDetect.Web.Controllers
                 Id = p.Id,
                 Name = p.Name,
                 City = p.City,
-                Image = p.Images.FirstOrDefault().Image.Link,
                 QuanratineEndDate = p.QuarantineEndDate.ToLocalTime().ToString(),
                 UCN = p.UCN,
                 HasReports = p.Reports.Any()
             }).ToListAsync();
+
+            foreach (var person in peoples)
+            {
+                person.Image = await peopleService.GetPersonImageLink(person.Id);
+            }
 
             var viewModel = new PeopleListingPageViewModel();
 
