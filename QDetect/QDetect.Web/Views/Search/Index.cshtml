@@ -46,8 +46,8 @@
 </table>
 <div class="row justify-content-center">
     <div id="search-navigation">
-        <button id="prev-arrow" class="btn" onclick="navigatePrevious()"><</button>
-        <button id="next-arrow" class="btn" onclick="navigateNext()">></button>
+        <button id="prev-arrow" class="btn styledBtn" onclick="navigatePrevious()"><</button>
+        <button id="next-arrow" class="btn styledBtn" onclick="navigateNext()">></button>
     </div>
 </div>
 
@@ -56,8 +56,11 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title d-inline-block mr-3" id="modalReported"></h5>
-                <h5 class="modal-title d-inline-block" id="modalCenterTitle"></h5>
+                <div class="d-inline-block align-items-center">
+                    <button class="modal-title btn styledBtn mr-3" id="modalReported">!</button>
+                    <h5 class="modal-title d-inline-block" id="modalCenterTitle"></h5>
+                </div>
+                
                 <p id="modalPersonId" hidden></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -66,14 +69,14 @@
             <div class="modal-body">
                 <img class="d-block mx-auto" id="modalImage" />
                 <table id="modalInfo" class="mt-2 w-100">
-                    <tr>
+                    <tr class="col-md-6 p-0">
                         <th>Name</th>
                         <th>ID</th>
                         <th>City</th>
                         <th>Quarantined until</th>
                         <th>Reported</th>
                     </tr>
-                    <tr>
+                    <tr class="col-md-6 p-0">
                         <td><p id="tableName" data-editable/></td>
                         <td><p id="tableUCN" data-editable/></td>
                         <td><p id="tableCity" data-editable/></td>

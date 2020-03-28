@@ -14,11 +14,13 @@ namespace QDetect.Web.Controllers
     {
         private readonly ICloudinaryService cloudinaryService;
         private readonly IPeopleService peopleService;
+        private readonly IReportService reportService;
 
-        public PersonController(ICloudinaryService cloudinaryService, IPeopleService peopleService)
+        public PersonController(ICloudinaryService cloudinaryService, IPeopleService peopleService, IReportService reportService)
         {
             this.cloudinaryService = cloudinaryService;
             this.peopleService = peopleService;
+            this.reportService = reportService;
         }
 
         [HttpGet]   
@@ -63,11 +65,13 @@ namespace QDetect.Web.Controllers
                 UCN = person.UCN
             };
 
-            viewModel.Reports = person.Reports.Select(r => new ReportViewModel
+            var reports = this.reportService.GetByPersonId(person.Id).Select(r => new ReportViewModel
             {
                 Id = r.Id,
                 ImageLink = r.Image.Link
             }).ToList();
+
+            viewModel.Reports = reports;
 
             return this.Json(viewModel);
         }

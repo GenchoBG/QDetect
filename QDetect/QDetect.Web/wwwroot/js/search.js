@@ -1,6 +1,6 @@
 ﻿var page = 0;
 var maxPages = 0;
-var peoplePerPage = 8;
+var peoplePerPage = 5;
 var peopleCount = 0;
 
 $(document).ready(() => {
@@ -46,7 +46,7 @@ $(document).ready(() => {
             type = "text";
         }
 
-        var input = $(`<input type=${type} id="${id}"/>`).val(el.text());
+        var input = $(`<input type=${type} class="form-control" id="${id}"/>`).val(el.text());
         el.replaceWith(input);
 
         var save = function () {
@@ -69,7 +69,7 @@ $(document).ready(() => {
 function openModal(person) {
     $("#modalCenterTitle").text(person.name);
     $("#modalPersonId").text(person.id);
-    person.hasReports ? $("#modalReported").text("!") : $("#modalReported").css("display", "none");
+    person.hasReports ? $("#modalReported").attr("hidden", false) : $("#modalReported").attr("hidden", true);
     $("#modalImage").attr("src", person.image);
     $("#tableName").text(person.name);
     $("#tableUCN").text(person.ucn);
