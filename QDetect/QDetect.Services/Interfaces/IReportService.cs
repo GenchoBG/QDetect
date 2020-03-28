@@ -6,6 +6,8 @@ namespace QDetect.Services.Interfaces
 {
     public interface IReportService
     {
+        Task<bool> ContainsAsync(int id);
+
         Task<Report> AddAsync(int personId, int imageId);
 
         Task DeleteAsync(int id);

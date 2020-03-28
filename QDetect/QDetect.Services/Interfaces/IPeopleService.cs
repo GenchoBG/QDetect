@@ -18,6 +18,6 @@ namespace QDetect.Services.Interfaces
 
         Task<string> GetPersonImageLink(int id);
 
-        Task<bool> ContainsUser(int id);
+        Task<bool> ContainsUserAsync(int id);
     }
 }
