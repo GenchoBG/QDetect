@@ -69,7 +69,7 @@ namespace QDetect.Services.Implementations
             return person;
         }
 
-        public async Task UpdateQuarantineAsync(int id, DateTime quarantine)
+        public async Task EditAsync(int id, string name, string ucn, string city, DateTime quarantine)
         {
             if (!await context.Persons.AnyAsync(p => p.Id == id))
             {
@@ -78,7 +78,10 @@ namespace QDetect.Services.Implementations
 
             var person = await context.Persons.FirstAsync(p => p.Id == id);
 
+            person.Name = name;
+            person.UCN = ucn;
             person.QuarantineEndDate = quarantine;
+            person.City = city;
 
             context.Persons.Update(person);
             await context.SaveChangesAsync();

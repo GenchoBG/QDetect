@@ -10,7 +10,7 @@ namespace QDetect.Services.Interfaces
     {
         Task<Person> AddAsync(string name, string link, string ucn, string city, List<double> embedding, DateTime quarantine);
 
-        Task UpdateQuarantineAsync(int id, DateTime quarantine);
+        Task EditAsync(int id, string name, string ucn, string city, DateTime quarantine);
 
         Task<Person> GetAsync(int id);
 

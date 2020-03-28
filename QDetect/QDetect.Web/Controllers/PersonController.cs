@@ -61,6 +61,7 @@ namespace QDetect.Web.Controllers
             return this.View(viewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Info(int id)
         {
             try
@@ -90,6 +91,21 @@ namespace QDetect.Web.Controllers
             {
                 return Redirect("/Home/Index");
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(PersonInfoBindingModel input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Redirect($"/People/Info?id={input.Id}");
+            }
+
+            var newDate = DateTime.Parse(input.QuarantineEndDate);
+
+            await peopleService.EditAsync(input.Id, input.Name, input.UCN, input.City, newDate);
+
+            return Redirect($"/People/Info?id={input.Id}");
         }
     }
 }
