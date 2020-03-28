@@ -64,7 +64,7 @@ ion-icon {
     margin: 0 auto;
 }
 
-#sumbitBtn {
+#submitBtn {
     border-color: #F38181;
     color: #F38181;
 }
@@ -91,6 +91,12 @@ ion-icon {
     #submitBtn {
         font-size: 1em;
     }
+}
+
+#faceForm .form-group input:focus {
+    border-color: #F38181 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #f38181;
+    outline: 0 none !important;
 }
 
 @media (min-width: 576px) {
