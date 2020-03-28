@@ -40,10 +40,8 @@ $(document).ready(() => {
             cache: false,
             success: function(person) {
                 console.log("SUCCESS");
-                console.log(person)
             },
             error: function(req, status, err) {
-                console.log("something went wrong");
                 console.log(status);
                 console.log(err);
                 console.log(req);
@@ -184,7 +182,6 @@ function checkPicture(e) {
         },
         error: function (req, status, err) {
             $("#uploadInfo").text("Something went wrong");
-            console.log("something went wrong");
             console.log(status);
             console.log(err);
             console.log(req);
