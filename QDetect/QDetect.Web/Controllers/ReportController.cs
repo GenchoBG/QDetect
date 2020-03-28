@@ -24,9 +24,7 @@ namespace QDetect.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(IFormFile image, IList<IList<double>> embeddings)
         {
-            var link = await this.cloudinaryService.UploadPictureAsync(image, Guid.NewGuid().ToString());
-
-            await this.imageReceiverService.ProcessAsync(link, embeddings);
+            await this.imageReceiverService.ProcessAsync(image, embeddings);
 
             return this.Ok();
         }

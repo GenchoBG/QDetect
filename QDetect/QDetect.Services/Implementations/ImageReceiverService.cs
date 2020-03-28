@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using QDetect.Data;
 using QDetect.Data.Models;
@@ -14,19 +15,17 @@ namespace QDetect.Services.Implementations
         private const double SimilarityThreshhold = 13;
 
         private readonly QDetectDbContext db;
-        private readonly IReportService reportService;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public ImageReceiverService(QDetectDbContext db)
+        public ImageReceiverService(QDetectDbContext db, ICloudinaryService cloudinaryService)
         {
             this.db = db;
+            this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task ProcessAsync(string link, IList<IList<double>> embeddings)
+        public async Task ProcessAsync(IFormFile im, IList<IList<double>> embeddings)
         {
-            var image = new Image()
-            {
-                Link = link
-            };
+            var image = new Image();
 
             foreach (var embedding in embeddings)
             {
@@ -34,6 +33,13 @@ namespace QDetect.Services.Implementations
 
                 if (distance <= SimilarityThreshhold)
                 {
+                    if (string.IsNullOrEmpty(image.Link))
+                    {
+                        var link = await this.cloudinaryService.UploadPictureAsync(im, Guid.NewGuid().ToString());
+
+                        image.Link = link;
+                    }
+
                     var person = mostSimilar.Embeddings.OrderBy(e => this.EucledianDistance(embedding, e)).First().Person;
 
                     var embeddingRecord = new Embedding()
