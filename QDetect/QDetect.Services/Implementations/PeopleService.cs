@@ -20,7 +20,6 @@ namespace QDetect.Services.Implementations
 
         public async Task<Person> AddAsync(string name, string link, string ucn, string city, List<double> embedding, DateTime quarantine)
         {
-
             var person = new Person
             {
                 Name = name,
@@ -34,16 +33,12 @@ namespace QDetect.Services.Implementations
                 Link = link
             };
 
-            await context.Images.AddAsync(image);
-
             person.Images.Add(new PersonImage
             {
                 Image = image,
                 Person = person
             });
-
-            await context.Persons.AddAsync(person);
-
+            
             var embed = new Embedding
             {
                 Image = image,
@@ -55,16 +50,15 @@ namespace QDetect.Services.Implementations
 
             embed.Values = embedding.Select((e, index) => new EmbeddingValue
             {
-                EmbeddingId = embed.Id,
+                Embedding = embed,
                 Value = e,
                 Index = index
             }).ToList();
 
-            context.Embeddings.Add(embed);
-
-
-            await context.Persons.AddAsync(person);
-            await context.SaveChangesAsync();
+            await this.context.Embeddings.AddAsync(embed);
+            await this.context.Images.AddAsync(image);
+            await this.context.Persons.AddAsync(person);
+            await this.context.SaveChangesAsync();
 
             return person;
         }

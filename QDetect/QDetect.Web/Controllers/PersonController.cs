@@ -1,5 +1,6 @@
 using System.Linq;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,25 +21,25 @@ namespace QDetect.Web.Controllers
             this.peopleService = peopleService;
         }
 
-        [HttpGet]
+        [HttpGet]   
         public async Task<IActionResult> Upload()
         {
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upload(PersonUploadBindingModel model)
+        public async Task<IActionResult> Upload(PersonUploadBindingModel bindingModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest();
             }
 
-            var link = await this.cloudinaryService.UploadPictureAsync(model.Image, Guid.NewGuid().ToString());
+            var link = await this.cloudinaryService.UploadPictureAsync(bindingModel.Image, Guid.NewGuid().ToString());
 
-            var person = await this.peopleService.AddAsync(model.Name, link, model.UCN, model.City, model.Embedding, model.Quarantine);
+            var person = await this.peopleService.AddAsync(bindingModel.Name, link, bindingModel.UCN, bindingModel.City, bindingModel.Embedding.ToList(), bindingModel.Quarantine);
 
-            return this.Ok(person);
+            return this.Ok(person.Id);
         }
 
         public async Task<IActionResult> All()

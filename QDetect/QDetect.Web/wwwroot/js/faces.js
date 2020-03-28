@@ -12,18 +12,22 @@ $(document).ready(() => {
         e.preventDefault();
 
         let formData = new FormData();
-        formData.append("embedding", embedding_values[0]);
-        console.log(embedding_values[0]);
+        //formData.append("embedding", embedding_values[0]);
+        
+        for (var i = 0; i < embedding_values[0].length; i++) {
+            formData.append('embedding[]', embedding_values[0][i]);
+        }
+
         formData.append("name", $("#fullName").val());
-        console.log($("#fullName").val());
+        //console.log($("#fullName").val());
         formData.append("city", $("#city").val());
-        console.log($("#city").val());
+        //console.log($("#city").val());
         formData.append("ucn", $("#ucn").val());
-        console.log($("#ucn").val());
+        //console.log($("#ucn").val());
         formData.append("image", file);
-        console.log(file);
+        //console.log(file);
         formData.append("quarantine", $("#quarantine").val());
-        console.log($("#quarantine").val());
+        //console.log($("#quarantine").val());
 
 
         console.log("Sending");
@@ -32,14 +36,18 @@ $(document).ready(() => {
             url: '/Person/Upload',
             data: formData,
             processData: false,
-            success: function() {
+            contentType: false,
+            cache: false,
+            success: function(person) {
                 console.log("SUCCESS");
+                console.log(person)
             },
             error: function(req, status, err) {
                 console.log("something went wrong");
                 console.log(status);
                 console.log(err);
                 console.log(req);
+                console.log(req.responseText);
             }
         });
     });
@@ -141,7 +149,7 @@ function dropHandler(ev) {
 function checkPicture(e) {
     e.preventDefault();
 
-    const facesApiUrl = "http://94.156.180.190:80/getembeddings";
+    const facesApiUrl = "http://localhost:80/getembeddings";
     let formData = new FormData();
     formData.append('face', file);
     console.log("FACE: ", file);
