@@ -67,7 +67,7 @@ namespace QDetect.Web.Controllers
             {
                 var person = await peopleService.GetAsync(id);
 
-                var viewModel = new PeopleViewModel
+                var viewModel = new PeopleInfoViewModel
                 {
                     Id = person.Id,
                     City = person.City,
@@ -77,6 +77,12 @@ namespace QDetect.Web.Controllers
                     QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToString(),
                     UCN = person.UCN
                 };
+
+                viewModel.Reports = person.Reports.Select(r => new ReportViewModel
+                {
+                    Id = r.Id,
+                    ImageLink = r.Image.Link
+                }).ToList();
 
                 return View(viewModel);
             }
