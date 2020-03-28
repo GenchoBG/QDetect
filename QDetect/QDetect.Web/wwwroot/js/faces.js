@@ -4,8 +4,8 @@ var file = null;
 var embedding_values = null;
 
 $(document).ready(() => {
-    $("#faceFile").change(function () {
-        handleFileSelect();
+    $("#faceFile").change(function (e) {
+        handleFileSelect(e);
     });
 
     $("#faceForm").submit((e) => {
@@ -64,7 +64,7 @@ function isValid() {
     return true;
 }
 
-function fileHandler() {
+function fileHandler(e) {
     valid = isValid(file);
     if (!valid) {
         return;
@@ -104,16 +104,18 @@ function fileHandler() {
 
     //Read the image
     picReader.readAsDataURL(file);
+
+    checkPicture(e);
 }
 
-function handleFileSelect() {
+function handleFileSelect(e) {
     if (window.File && window.FileList && window.FileReader) {
 
         var files = event.target.files; //FileList object
 
         file = files[0];
 
-        fileHandler();
+        fileHandler(e);
     } else {
         console.log("Your browser does not support File API");
     }
@@ -134,8 +136,6 @@ function dropHandler(ev) {
         }
     }
     fileHandler();
-
-    checkPicture(ev);
 }
 
 function checkPicture(e) {
