@@ -39,16 +39,16 @@ while True:
     if len(embeddings) > 0:
         
         guid = str(uuid.uuid4())
-        number = cloudinary.uploader.upload(imagePath, public_id = guid, folder="ad_images")
-        link = cloudinary.utils.cloudinary_url(guid+".jpg");
+        cloudinary_res = cloudinary.uploader.upload(imagePath, public_id = guid, folder="ad_images")
+        
+        link = cloudinary_res['secure_url']
         
         data = {
             'embeddings' : embeddings,
             'link' : link
-        }
+        }        
         response = requests.post(aspNetServerUrl, data, files)
         
-        print(response.text)
         break
     
     os.remove(imagePath)
