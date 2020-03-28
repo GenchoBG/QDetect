@@ -10,12 +10,14 @@ namespace QDetect.Web.BindingModels
     {
         public string Name { get; set; }
 
+        public IFormFile Image { get; set; }
+
         public string UCN { get; set; }
 
         public string City { get; set; }
 
-        public DateTime QuanratineEndDate { get; set; }
+        public List<double> Embedding { get; set; }
 
-        public IFormFile Image { get; set; }
+        public DateTime Quarantine { get; set; }
     }
 }
