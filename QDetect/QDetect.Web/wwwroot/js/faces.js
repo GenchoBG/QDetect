@@ -12,23 +12,16 @@ $(document).ready(() => {
         e.preventDefault();
 
         let formData = new FormData();
-        //formData.append("embedding", embedding_values[0]);
-        
+
         for (var i = 0; i < embedding_values[0].length; i++) {
             formData.append('embedding[]', embedding_values[0][i]);
         }
 
         formData.append("name", $("#fullName").val());
-        //console.log($("#fullName").val());
         formData.append("city", $("#city").val());
-        //console.log($("#city").val());
         formData.append("ucn", $("#ucn").val());
-        //console.log($("#ucn").val());
         formData.append("image", file);
-        //console.log(file);
         formData.append("quarantine", $("#quarantine").val());
-        //console.log($("#quarantine").val());
-
 
         console.log("Sending");
         $.ajax({
@@ -52,7 +45,6 @@ $(document).ready(() => {
 });
 
 function isValid() {
-    //Only pics
     if (!file.type.match('image')) {
         console.log("invalid type");
 
@@ -76,7 +68,6 @@ function fileHandler(e) {
         return;
     }
 
-    //Check File API support
     if ($(".thumbnail")) {
         $(".thumbnail").remove();
     }
@@ -108,7 +99,6 @@ function fileHandler(e) {
             });
         });
 
-    //Read the image
     picReader.readAsDataURL(file);
 
     checkPicture(e);
