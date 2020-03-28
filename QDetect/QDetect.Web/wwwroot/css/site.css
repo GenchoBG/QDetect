@@ -72,3 +72,41 @@ body {
     .submitBtn:focus, .submitBtn:not(:disabled):not(.disabled):active:focus {
         box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
     }
+
+.cta {
+    padding: 24rem 0;
+    background: url(https://images.unsplash.com/photo-1493794179168-82ca7cb00437?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80) center center;
+    background-size: cover;
+    z-index: 10;
+    position: relative;
+}
+
+    .cta h1 {
+        font-size: 4rem;
+        color: #e5e5e5
+    }
+
+.cta p{
+    font-size: 2rem;
+    color: #e5e5e5
+}
+
+    .cta .btn-purple {
+        border: 1px solid #625772;
+        border-radius: 10px;
+        background-color: #625772;
+        color: #e5e5e5;
+        font-size: 1.5rem;
+    }
+
+.cta:after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+}
