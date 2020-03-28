@@ -110,6 +110,12 @@ input:focus {
         font-size: 1.5rem;
     }
 
+    .cta a:hover {
+        border: 1px solid #e5e5e5;
+        background-color: #e5e5e5;
+        color: #625772;
+    }
+
     .cta:after {
         display: block;
         content: '';
