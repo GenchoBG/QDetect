@@ -10,7 +10,7 @@
         <div class="input-group mx-auto w-50">
             <input type="text" class="form-control" id="searchInput" placeholder="Search by name or ID" name="searchQuery">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-outline-warning submitBtn">Search</button>
+                <button type="submit" class="btn btn-outline-warning submitBtn" id="search-btn">Search</button>
             </div>
         </div>
     </form>
@@ -19,31 +19,38 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">ID</th>
-            <th scope="col">City</th>
-            <th scope="col">Quarantined until</th>
-            <th scope="col">Details</th>
-        </tr>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        <th scope="col">City</th>
+        <th scope="col">Quarantined until</th>
+        <th scope="col">Details</th>
+    </tr>
     </thead>
-    <tbody>
-        @foreach (var person in Model.People)
-        {
-            <tr class="@(person.HasReports ? "reported":"not-reported")">
-                <td>@person.Name</td>
-                <td>@person.UCN</td>
-                <td>@person.City</td>
-                <td>@person.QuarantineEndDate</td>
-                <td>
-                    <button onclick='openModal(@Html.Raw(Json.Serialize(person)))' type="button" class="btn btn-outline-warning submitBtn" data-toggle="modal" data-target="#modal">
-                        Details
-                    </button>
-                </td>
-            </tr>
-        }
+    <tbody id="results">
+    @foreach (var person in Model.People)
+    {
+        <tr class="@(person.HasReports ? "reported":"not-reported")" id="table-tr-@person.Id" hidden>
+            <td id="personName">@person.Name</td>
+            <td id="personUCN">@person.UCN</td>
+            <td id="personCity">@person.City</td>
+            <td id="personQuarantine">@person.QuarantineEndDate</td>
+            <td>
+                <button onclick='openModal(@Html.Raw(Json.Serialize(person)))' type="button" class="btn btn-outline-warning submitBtn" data-toggle="modal" data-target="#modal">
+                    Details
+                </button>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+<div class="row justify-content-center">
+    <div id="search-navigation">
+        <button id="prev-arrow" class="btn" onclick="navigatePrevious()"><</button>
+        <button id="next-arrow" class="btn" onclick="navigateNext()">></button>
+    </div>
+</div>
+
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -51,30 +58,33 @@
             <div class="modal-header">
                 <h5 class="modal-title d-inline-block mr-3" id="modalReported"></h5>
                 <h5 class="modal-title d-inline-block" id="modalCenterTitle"></h5>
+                <p id="modalPersonId" hidden></p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <img class="d-block mx-auto" id="modalImage" />
-                <table id="modalInfo" class="mt-2">
+                <table id="modalInfo" class="mt-2 w-100">
                     <tr>
                         <th>Name</th>
+                        <th>ID</th>
                         <th>City</th>
                         <th>Quarantined until</th>
                         <th>Reported</th>
                     </tr>
                     <tr>
-                        <td id="tableName" data-editable></td>
-                        <td id="tableCity" data-editable></td>
-                        <td id="tableQuarantine" data-editable></td>
-                        <td id="tableReported"></td>
+                        <td><p id="tableName" data-editable/></td>
+                        <td><p id="tableUCN" data-editable/></td>
+                        <td><p id="tableCity" data-editable/></td>
+                        <td><p id="tableQuarantine" data-editable/></td>
+                        <td><p id="tableReported"/></td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn submitBtn" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveInfo()">Save changes</button>
             </div>
         </div>
     </div>
