@@ -30,5 +30,31 @@ namespace QDetect.Web.Controllers
 
             return this.Ok();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Archive(int id)
+        {
+            if (!await reportService.ContainsAsync(id))
+            {
+                return Redirect("/Home/Index");
+            }
+
+            await reportService.ArchiveAsync(id);
+
+            return this.Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!await reportService.ContainsAsync(id))
+            {
+                return Redirect("/Home/Index");
+            }
+
+            await reportService.DeleteAsync(id);
+
+            return this.Ok();
+        }
     }
 }
