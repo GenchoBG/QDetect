@@ -54,6 +54,7 @@ namespace QDetect.Web
                 configuration.RootPath = "ClientApp/build";
             });
 
+            services.AddTransient<IImageReceiverService, ImageReceiverService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IPeopleService, PeopleService>();
             services.AddTransient<IReportService, ReportService>();

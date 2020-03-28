@@ -10,7 +10,7 @@ using QDetect.Data;
 namespace QDetect.Data.Migrations
 {
     [DbContext(typeof(QDetectDbContext))]
-    [Migration("20200327200359_Everything")]
+    [Migration("20200328184557_Everything")]
     partial class Everything
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ namespace QDetect.Data.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("PersonImage");
+                    b.ToTable("PeopleImages");
                 });
 
             modelBuilder.Entity("QDetect.Data.Models.Report", b =>
@@ -119,8 +119,6 @@ namespace QDetect.Data.Migrations
 
                     b.Property<int>("ImageId");
 
-                    b.Property<int>("ImageId1");
-
                     b.Property<bool>("IsArchived");
 
                     b.Property<int>("PersonId");
@@ -128,8 +126,6 @@ namespace QDetect.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ImageId");
-
-                    b.HasIndex("ImageId1");
 
                     b.HasIndex("PersonId");
 
@@ -160,7 +156,7 @@ namespace QDetect.Data.Migrations
             modelBuilder.Entity("QDetect.Data.Models.PersonImage", b =>
                 {
                     b.HasOne("QDetect.Data.Models.Image", "Image")
-                        .WithMany()
+                        .WithMany("Persons")
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -172,14 +168,9 @@ namespace QDetect.Data.Migrations
 
             modelBuilder.Entity("QDetect.Data.Models.Report", b =>
                 {
-                    b.HasOne("QDetect.Data.Models.Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("QDetect.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId1")
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("QDetect.Data.Models.Person", "Person")
