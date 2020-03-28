@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QDetect.Web.ViewModels
 {
-    public class PeopleViewModel
+    public class PeopleInfoViewModel
     {
         public int Id { get; set; }
 
@@ -20,5 +20,7 @@ namespace QDetect.Web.ViewModels
         public string Image { get; set; }
 
         public bool HasReports { get; set; }
+
+        public IEnumerable<ReportViewModel> Reports = new List<ReportViewModel>();
     }
 }
