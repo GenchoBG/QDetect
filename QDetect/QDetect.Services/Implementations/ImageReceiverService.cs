@@ -23,9 +23,17 @@ namespace QDetect.Services.Implementations
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task ProcessAsync(IFormFile im, IList<IList<double>> embeddings)
+        public async Task ProcessAsync(string link, IList<IList<double>> embeddings)
         {
-            var image = new Image();
+            var image = new Image()
+            {
+                Link = link
+            };
+
+            if (embeddings.Count != 1)
+            {
+                throw new Exception("eto kude e mizeriqta");
+            }
 
             foreach (var embedding in embeddings)
             {
@@ -33,13 +41,11 @@ namespace QDetect.Services.Implementations
 
                 if (distance <= SimilarityThreshhold)
                 {
-                    if (string.IsNullOrEmpty(image.Link))
+                    if (image.Id == 0)
                     {
-                        var link = await this.cloudinaryService.UploadPictureAsync(im, Guid.NewGuid().ToString());
-
-                        image.Link = link;
+                        await this.db.Images.AddAsync(image);
+                        await this.db.SaveChangesAsync();
                     }
-
                     var person = mostSimilar.Embeddings.OrderBy(e => this.EucledianDistance(embedding, e)).First().Person;
 
                     var embeddingRecord = new Embedding()
@@ -56,8 +62,8 @@ namespace QDetect.Services.Implementations
                             Value = embedding[i]
                         });
                     }
-
-                    image.Embeddings.Add(embeddingRecord);
+                    await this.db.Embeddings.AddAsync(embeddingRecord);
+                    await this.db.SaveChangesAsync();
 
                     var report = new Report()
                     {
@@ -67,12 +73,13 @@ namespace QDetect.Services.Implementations
                         Person = person
                     };
 
-                    person.Images.Add(new PersonImage()
+                    var personImage = new PersonImage()
                     {
                         Person = person,
                         Image = image
-                    });
+                    };
 
+                    await this.db.PeopleImages.AddAsync(personImage);
                     await this.db.Reports.AddAsync(report);
                     await this.db.SaveChangesAsync();
                 }
@@ -90,6 +97,8 @@ namespace QDetect.Services.Implementations
                                     .Images
                                     .Include(i => i.Embeddings)
                                     .ThenInclude(e => e.Values)
+                                    .Include(i => i.Persons)
+                                    .ThenInclude(pi => pi.Person)
                                     .ToList()
                                     .OrderBy(i =>
                                         i.Embeddings.Max(e => this.EucledianDistance(embedding, e)))

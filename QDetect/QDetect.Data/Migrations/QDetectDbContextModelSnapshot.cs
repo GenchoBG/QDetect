@@ -15,7 +15,7 @@ namespace QDetect.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -117,8 +117,6 @@ namespace QDetect.Data.Migrations
 
                     b.Property<int>("ImageId");
 
-                    b.Property<int>("ImageId1");
-
                     b.Property<bool>("IsArchived");
 
                     b.Property<int>("PersonId");
@@ -126,8 +124,6 @@ namespace QDetect.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ImageId");
-
-                    b.HasIndex("ImageId1");
 
                     b.HasIndex("PersonId");
 
@@ -170,14 +166,9 @@ namespace QDetect.Data.Migrations
 
             modelBuilder.Entity("QDetect.Data.Models.Report", b =>
                 {
-                    b.HasOne("QDetect.Data.Models.Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("QDetect.Data.Models.Image", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId1")
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("QDetect.Data.Models.Person", "Person")
