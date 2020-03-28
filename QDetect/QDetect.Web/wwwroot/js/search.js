@@ -13,13 +13,23 @@ $(document).ready(() => {
     $('body').on('click', '[data-editable]', function () {
 
         var el = $(this);
+        console.log($(this));
+        var id = $(this)[0].id;
+        var type = "";
+        var date = null;
+        if (id === "tableQuarantine") {
+            type = "date";
+            date = $(this)[0].innerText;
+        } else {
+            type = "text";
+        }
 
-        var input = $('<input/>').val(el.text());
+        var input = $(`<input type=${type} id="${id}"/>`).val(el.text());
         el.replaceWith(input);
 
         var save = function () {
-            var td = $(`<td data-editable id=${$(this).id}></td>`).text(input.val());
-            input.replaceWith(td);
+            var p = $(`<p data-editable id="${id}"/>`).text(date ? input.val() ? input.val() : date : input.val());
+            input.replaceWith(p);
         };
 
         /**

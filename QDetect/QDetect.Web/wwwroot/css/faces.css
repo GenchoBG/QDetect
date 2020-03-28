@@ -90,7 +90,7 @@ ion-icon {
 
 #faceForm .form-group input:focus {
     border-color: #F38181 !important;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px #f38181;
+    box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
     outline: 0 none !important;
 }
 

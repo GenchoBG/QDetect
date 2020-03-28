@@ -23,3 +23,7 @@
 #modalInfo td {
     text-align: right;
 }
+
+#modalInfo p{
+    margin-bottom: 0;
+}
