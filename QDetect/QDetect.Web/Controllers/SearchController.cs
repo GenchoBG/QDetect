@@ -27,14 +27,14 @@ namespace QDetect.Web.Controllers
 
             foreach (var person in people)
             {
-                peopleModel.Peoples.Append(new PeopleViewModel()
+                peopleModel.People.Add(new PeopleViewModel()
                 {
                     Name = person.Name,
                     City = person.City,
                     HasReports = person.Reports.Count > 0,
                     Id = person.Id,
                     Image = this.peopleService.GetPersonImageLink(person.Id).Result,
-                    QuarantineEndDate = person.QuarantineEndDate.ToShortTimeString(),
+                    QuarantineEndDate = person.QuarantineEndDate.ToLongDateString(),
                     UCN = person.UCN
                 });
             }
@@ -42,8 +42,8 @@ namespace QDetect.Web.Controllers
             return this.View(peopleModel);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Search(string searchQuery)
+        [HttpPost]
+        public async Task<IActionResult> Index(string searchQuery)
         {
             var people = this.peopleService.GetAll()
                 .Where(p => p.Name.Contains(searchQuery) || p.UCN.StartsWith(searchQuery)).ToList();
@@ -52,7 +52,7 @@ namespace QDetect.Web.Controllers
 
             foreach (var person in people)
             {
-                peopleModel.Peoples.ToList().Add(new PeopleViewModel()
+                peopleModel.People.Add(new PeopleViewModel()
                 {
                     Name = person.Name,
                     City = person.City,
@@ -64,7 +64,7 @@ namespace QDetect.Web.Controllers
                 });
             }
 
-            return this.View(people);
+            return this.View("Index", peopleModel);
         }
     }
 }

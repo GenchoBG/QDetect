@@ -1,0 +1,7 @@
+﻿.reported {
+    background-color: rgba(243, 129, 129, 0.4);
+}
+
+.not-reported {
+    background-color: rgba(0, 255, 0, 0.2);
+}

@@ -64,11 +64,6 @@ ion-icon {
     margin: 0 auto;
 }
 
-#submitBtn {
-    border-color: #F38181;
-    color: #F38181;
-}
-
 @media (max-width: 575px) {
     #heading {
         font-size: 2em;
