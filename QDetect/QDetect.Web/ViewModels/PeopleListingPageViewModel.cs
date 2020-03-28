@@ -7,6 +7,6 @@ namespace QDetect.Web.ViewModels
 {
     public class PeopleListingPageViewModel
     {
-        public IEnumerable<PeopleViewModel> Peoples { get; set; } = new List<PeopleViewModel>();
+        public IList<PeopleViewModel> People { get; set; } = new List<PeopleViewModel>();
     }
 }

@@ -1,10 +1,21 @@
-﻿@using QDetect.Data.Models
-@model PeopleListingPageViewModel
+﻿@model PeopleListingPageViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<link rel="stylesheet" href="css/search.css"/>
+
+<div class="d-block mb-4">
+    <form method="post" class="form-inline" asp-controller="Search" asp-action="Index">
+        <div class="input-group mx-auto w-50">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by name or ID" name="searchQuery">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-warning submitBtn">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
 
 <table class="table">
     <thead>
@@ -12,15 +23,17 @@
             <th scope="col">Name</th>
             <th scope="col">ID</th>
             <th scope="col">City</th>
+            <th scope="col">Quarantined until</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var person in Model.Peoples)
+        @foreach (var person in Model.People)
         {
-            <tr>
+            <tr class="@(person.HasReports ? "reported":"not-reported")">
                 <td>@person.Name</td>
                 <td>@person.UCN</td>
                 <td>@person.City</td>
+                <td>@person.QuarantineEndDate</td>
             </tr>
         }
     </tbody>

@@ -42,30 +42,6 @@ namespace QDetect.Web.Controllers
             return this.Ok(person.Id);
         }
 
-        public async Task<IActionResult> All()
-        {
-            var peoples = await peopleService.GetAll().Select(p => new PeopleViewModel
-            {
-                Id = p.Id,
-                Name = p.Name,
-                City = p.City,
-                QuarantineEndDate = p.QuarantineEndDate.ToLocalTime().ToString(),
-                UCN = p.UCN,
-                HasReports = p.Reports.Any()
-            }).ToListAsync();
-
-            foreach (var person in peoples)
-            {
-                person.Image = await peopleService.GetPersonImageLink(person.Id);
-            }
-
-            var viewModel = new PeopleListingPageViewModel();
-
-            viewModel.Peoples = peoples;
-
-            return this.View(viewModel);
-        }
-
         [HttpGet]
         public async Task<IActionResult> Info(int id)
         {

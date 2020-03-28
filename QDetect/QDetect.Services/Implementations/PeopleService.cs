@@ -92,7 +92,7 @@ namespace QDetect.Services.Implementations
 
         public IQueryable<Person> GetAll()
         {
-            return context.Persons;
+            return context.Persons.Include(p => p.Images);
         }
 
         public async Task<string> GetPersonImageLink(int id)
@@ -103,8 +103,10 @@ namespace QDetect.Services.Implementations
             }
 
             var person = await context.Persons.FirstAsync(p => p.Id == id);
+            var imageLinks = context.PeopleImages.Where(pi => pi.ImageId == person.Id).Select(pi => pi.Image.Link).ToList();
 
-            return person.Images.FirstOrDefault().Image.Link;
+
+            return imageLinks.FirstOrDefault();
         }
 
         public async Task<bool> ContainsUserAsync(int id)
