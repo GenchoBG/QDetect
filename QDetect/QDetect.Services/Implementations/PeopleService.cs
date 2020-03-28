@@ -46,7 +46,6 @@ namespace QDetect.Services.Implementations
             };
 
             image.Embeddings.Add(embed);
-            context.Images.Update(image);
 
             embed.Values = embedding.Select((e, index) => new EmbeddingValue
             {

@@ -149,7 +149,7 @@ function dropHandler(ev) {
 function checkPicture(e) {
     e.preventDefault();
 
-    const facesApiUrl = "http://localhost:80/getembeddings";
+    const facesApiUrl = "http://94.156.180.190:80/getembeddings";
     let formData = new FormData();
     formData.append('face', file);
     console.log("FACE: ", file);
