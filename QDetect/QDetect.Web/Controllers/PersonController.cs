@@ -57,9 +57,9 @@ namespace QDetect.Web.Controllers
                 Id = person.Id,
                 City = person.City,
                 HasReports = person.Reports.Any(),
-                Image = person.Images.FirstOrDefault().Image.Link,
+                Image = await this.peopleService.GetPersonImageLink(person.Id),
                 Name = person.Name,
-                QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToString(),
+                QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToLongDateString(),
                 UCN = person.UCN
             };
 
@@ -69,7 +69,7 @@ namespace QDetect.Web.Controllers
                 ImageLink = r.Image.Link
             }).ToList();
 
-            return View(viewModel);
+            return this.Json(viewModel);
         }
 
         [HttpPost]
@@ -77,14 +77,14 @@ namespace QDetect.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Redirect($"/People/Info?id={input.Id}");
+                return this.NotFound();
             }
 
             var newDate = DateTime.Parse(input.QuarantineEndDate);
 
             await peopleService.EditAsync(input.Id, input.Name, input.UCN, input.City, newDate);
 
-            return Redirect($"/People/Info?id={input.Id}");
+            return this.Ok();
         }
     }
 }

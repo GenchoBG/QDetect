@@ -63,6 +63,11 @@ body {
     color: #F38181;
 }
 
+.submitBtn:disabled {
+    background-color: #F38181;
+    color: #fefaec;
+}
+
     .submitBtn:hover, .submitBtn:not(:disabled):not(.disabled):active {
         background-color: #F38181;
         color: #fefaec;
@@ -72,6 +77,12 @@ body {
     .submitBtn:focus, .submitBtn:not(:disabled):not(.disabled):active:focus {
         box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
     }
+
+input:focus {
+    border-color: #F38181 !important;
+    box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5) !important;
+    outline: 0 none !important;
+}
 
 .cta {
     padding: 24rem 0;
@@ -99,7 +110,7 @@ body {
         font-size: 1.5rem;
     }
 
-.cta:after {
+    .cta:after {
         display: block;
         content: '';
         position: absolute;
@@ -109,4 +120,4 @@ body {
         right: 0;
         background-color: rgba(0, 0, 0, 0.4);
         z-index: -1;
-}
+    }

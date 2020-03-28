@@ -64,7 +64,7 @@ namespace QDetect.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonImage",
+                name: "PeopleImages",
                 columns: table => new
                 {
                     PersonId = table.Column<int>(nullable: false),
@@ -72,15 +72,15 @@ namespace QDetect.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonImage", x => new { x.ImageId, x.PersonId });
+                    table.PrimaryKey("PK_PeopleImages", x => new { x.ImageId, x.PersonId });
                     table.ForeignKey(
-                        name: "FK_PersonImage_Images_ImageId",
+                        name: "FK_PeopleImages_Images_ImageId",
                         column: x => x.ImageId,
                         principalTable: "Images",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PersonImage_Persons_PersonId",
+                        name: "FK_PeopleImages_Persons_PersonId",
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
@@ -94,7 +94,6 @@ namespace QDetect.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ImageId = table.Column<int>(nullable: false),
-                    ImageId1 = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     PersonId = table.Column<int>(nullable: false),
                     IsArchived = table.Column<bool>(nullable: false)
@@ -108,12 +107,6 @@ namespace QDetect.Data.Migrations
                         principalTable: "Images",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_Images_ImageId1",
-                        column: x => x.ImageId1,
-                        principalTable: "Images",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reports_Persons_PersonId",
                         column: x => x.PersonId,
@@ -159,19 +152,14 @@ namespace QDetect.Data.Migrations
                 column: "EmbeddingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonImage_PersonId",
-                table: "PersonImage",
+                name: "IX_PeopleImages_PersonId",
+                table: "PeopleImages",
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_ImageId",
                 table: "Reports",
                 column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ImageId1",
-                table: "Reports",
-                column: "ImageId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reports_PersonId",
@@ -185,7 +173,7 @@ namespace QDetect.Data.Migrations
                 name: "EmbeddingValues");
 
             migrationBuilder.DropTable(
-                name: "PersonImage");
+                name: "PeopleImages");
 
             migrationBuilder.DropTable(
                 name: "Reports");

@@ -87,7 +87,7 @@ namespace QDetect.Services.Implementations
                 throw new ArgumentException("Invalid person id");
             }
 
-            return await context.Persons.Include(p => p.Images).Include(p => p.Reports).FirstAsync(p => p.Id == id);
+			return await context.Persons.Include(p => p.Images).Include(p => p.Reports).FirstAsync(p => p.Id == id);
         }
 
         public IQueryable<Person> GetAll()

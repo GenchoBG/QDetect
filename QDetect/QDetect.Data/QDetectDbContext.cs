@@ -29,10 +29,10 @@ namespace QDetect.Data
                 .HasMany(p => p.Reports)
                 .WithOne(r => r.Person)
                 .HasForeignKey(r => r.PersonId);
-
-            modelBuilder.Entity<Report>()
-                .HasOne<Image>()
-                .WithMany()
+            
+            modelBuilder.Entity<Image>()
+                .HasMany<Report>()
+                .WithOne(r => r.Image)
                 .HasForeignKey(r => r.ImageId);
 
             modelBuilder.Entity<Embedding>()
