@@ -2,9 +2,9 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Sticky footer styles
@@ -15,47 +15,50 @@ html, body {
     color: #625772;
     background-color: #FEFAEC;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 .submitBtn {
@@ -63,10 +66,10 @@ body {
     color: #F38181;
 }
 
-.submitBtn:disabled {
-    background-color: #F38181;
-    color: #fefaec;
-}
+    .submitBtn:disabled {
+        background-color: #F38181;
+        color: #fefaec;
+    }
 
     .submitBtn:hover, .submitBtn:not(:disabled):not(.disabled):active {
         background-color: #F38181;
@@ -74,12 +77,60 @@ body {
         border-color: #f38181;
     }
 
-    .submitBtn:focus, .submitBtn:not(:disabled):not(.disabled):active:focus {
-        box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
-    }
+        .submitBtn:focus, .submitBtn:not(:disabled):not(.disabled):active:focus {
+            box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
+        }
 
 input:focus {
     border-color: #F38181 !important;
     box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5) !important;
     outline: 0 none !important;
+}
+
+.cta {
+    padding: 24rem 0;
+    background: url(https://images.unsplash.com/photo-1493794179168-82ca7cb00437?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80) center center;
+    background-size: cover;
+    z-index: 10;
+    position: relative;
+}
+
+    .cta h1 {
+        font-size: 4rem;
+        color: #e5e5e5
+    }
+
+    .cta p {
+        font-size: 2rem;
+        color: #e5e5e5
+    }
+
+    .cta .btn-purple {
+        border: 1px solid #625772;
+        border-radius: 10px;
+        background-color: #625772;
+        color: #e5e5e5;
+        font-size: 1.5rem;
+    }
+
+    .cta a:hover {
+        border: 1px solid #e5e5e5;
+        background-color: #e5e5e5;
+        color: #625772;
+    }
+
+    .cta:after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+    }
+
+#logo {
+    width: 70px;
 }

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ReportViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@foreach (var report in Model)
+{
+    <p>@report.Id, @report.ImageLink</p>
+}

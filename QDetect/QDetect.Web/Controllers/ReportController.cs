@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QDetect.Services.Interfaces;
 using QDetect.Web.BindingModels;
+using QDetect.Web.ViewModels;
 
 namespace QDetect.Web.Controllers
 {
@@ -20,6 +21,25 @@ namespace QDetect.Web.Controllers
             this.imageReceiverService = imageReceiverService;
             this.reportService = reportService;
             this.cloudinaryService = cloudinaryService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            var reports = this.reportService.GetByPersonId(id).ToList();
+
+            var reportsModel = new List<ReportViewModel>();
+
+            foreach (var report in reports)
+            {
+                reportsModel.Add(new ReportViewModel()
+                {
+                    Id = report.Id,
+                    ImageLink = report.Image.Link
+                });
+            }
+
+            return this.View(reportsModel);
         }
 
         [HttpPost]

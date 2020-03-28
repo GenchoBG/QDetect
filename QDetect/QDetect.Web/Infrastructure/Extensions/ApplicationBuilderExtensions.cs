@@ -11,8 +11,7 @@ namespace QDetect.Web.Infrastructure.Extensions
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetService<QDetectDbContext>().Database.Migrate();
-
+                // serviceScope.ServiceProvider.GetService<QDetectDbContext>().Database.Migrate();
                 // Seed data here.
             }
 
