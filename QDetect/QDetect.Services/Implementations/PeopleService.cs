@@ -103,7 +103,7 @@ namespace QDetect.Services.Implementations
             }
 
             var person = await context.Persons.FirstAsync(p => p.Id == id);
-            var imageLinks = context.PeopleImages.Where(pi => pi.ImageId == person.Id).Select(pi => pi.Image.Link).ToList();
+            var imageLinks = context.PeopleImages.Where(pi => pi.PersonId == person.Id).Select(pi => pi.Image.Link).OrderBy(i => i).ToList();
 
 
             return imageLinks.FirstOrDefault();
