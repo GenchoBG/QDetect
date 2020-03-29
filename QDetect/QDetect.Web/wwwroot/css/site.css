@@ -88,48 +88,71 @@ input:focus {
 }
 
 .cta {
-    padding: 24rem 0;
+    padding: 30rem 0;
     background: url(https://images.unsplash.com/photo-1493794179168-82ca7cb00437?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80) center center;
+    -ms-background-size: cover;
     background-size: cover;
     z-index: 10;
     position: relative;
+    -webkit-will-change: transform;
+    -moz-will-change: transform;
+    -o-will-change: transform;
+    will-change: transform;
+    -ms-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    height: 100%;
 }
 
-    .cta h1 {
+.cta h1 {
         font-size: 4rem;
-        color: #e5e5e5
-    }
-
-    .cta p {
-        font-size: 2rem;
-        color: #e5e5e5
-    }
-
-    .cta .btn-purple {
-        border: 1px solid #625772;
-        border-radius: 10px;
-        background-color: #625772;
         color: #e5e5e5;
-        font-size: 1.5rem;
     }
 
-    .cta a:hover {
-        border: 1px solid #e5e5e5;
-        background-color: #e5e5e5;
-        color: #625772;
-    }
+.tilt-text {
+    display: block;
+    margin: auto;
+    -ms-transform: translateZ(60px) translateX(-50%) translateY(-50%);
+    -webkit-transform: translateZ(20px) translateX(-50%) translateY(-50%);
+    transform: translateZ(20px) translateX(-50%) translateY(-50%);
+    position: absolute;
+    left: 50%;
+    top: 40%;
+}
 
-    .cta:after {
-        display: block;
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.4);
-        z-index: -1;
-    }
+.cta p {
+    font-size: 2rem;
+    color: #e5e5e5
+}
+
+.cta .btn-purple {
+    border: 1px solid #625772;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #625772;
+    color: #e5e5e5;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 60%;
+}
+
+.cta a:hover {
+    border: 1px solid #e5e5e5;
+    background-color: #e5e5e5;
+    color: #625772;
+}
+
+.cta:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
 
 #logo {
     width: 150px;

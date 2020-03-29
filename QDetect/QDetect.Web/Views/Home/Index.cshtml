@@ -2,8 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center cta">
-    <h1>QDetect</h1>
+<div data-tilt
+     data-tilt-perspective="900" data-tilt-speed="300" data-tilt-max="15" class="text-center cta">
+    <h1 class="tilt-text" style="transform: translateZ(100px) translateX(-53%);">QDetect</h1>
     <p>Find who violates government rules under COVID-19 quarantine</p>
-    <a asp-controller="Person" asp-action="Upload" class="btn btn-purple">Upload Person</a>
+    <a asp-controller="Person" asp-action="Upload" class="btn btn-purple tilt-text">Upload Person</a>
+
 </div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js" type="text/javascript"></script>
