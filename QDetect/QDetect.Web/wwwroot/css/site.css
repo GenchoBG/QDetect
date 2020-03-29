@@ -81,6 +81,21 @@ body {
             box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
         }
 
+.styledBtn {
+    background-color: #f38181;
+    color: #FEFAEC
+}
+
+    .styledBtn:active, .styledBtn:hover {
+        background-color: #f56868;
+        color: #FEFAEC;
+    }
+
+    .styledBtn:active {
+        box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
+    }
+
+
 input:focus {
     border-color: #F38181 !important;
     box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5) !important;
@@ -104,7 +119,7 @@ input:focus {
     height: 100%;
 }
 
-.cta h1 {
+    .cta h1 {
         font-size: 4rem;
         color: #e5e5e5;
     }

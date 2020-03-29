@@ -5,37 +5,51 @@
 
 <h1 class="d-flex justify-content-center">@Model.ToList()[0].PersonName</h1>
 
-<div class="bd-example">
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+<div class="bd-carousel">
+    <div id="carouselCaptions" class="carousel slide" data-ride="carousel">
         @if (Model.ToList().Count > 1)
         {
             <ol class="carousel-indicators">
                 @for (var i = 0; i < Model.ToList().Count; i++)
                 {
-                    <li data-target="#carouselCaptions" data-slide-to="@i" @(i == 0 ? @"class='active'" : null)></li>
+                    <li id="carousel-indicator-@i" data-target="#carouselCaptions" data-slide-to="@i" @(i == 0 ? @"class='active'" : null)></li>
                 }
             </ol>
         }
 
-        @for (var i = 0; i < Model.ToList().Count; i++)
-        {
-            <div class="carousel-item @(i == 0 ? "active" : null)">
-                <img src="@Model.ToList()[i].ImageLink" class="d-block w-50" alt="report">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>@Model.ToList()[i].TimeTaken</h5>
+        <div class="carousel-inner">
+            @for (var i = 0; i < Model.ToList().Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : null)" id="carousel-item-@Model.ToList()[i].Id">
+                    <img src="@Model.ToList()[i].ImageLink" class="d-block w-100" alt="report">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model.ToList()[i].TimeTaken</h5>
+                    </div>
+                    <span class="itemId" hidden>@Model.ToList()[i].Id</span>
                 </div>
-            </div>
-        }
+            }
+        </div>
+
         @if (Model.ToList().Count > 1)
         {
             <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#carouselCaptions" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         }
     </div>
 </div>
+
+<div id="controls" class="mt-2 row justify-content-center">
+    <button onclick="archiveReport($('.carousel-item.active').find($('.itemId'))[0].innerText)" class="btn styledBtn m-1">Archive</button>
+    <button onclick="deleteReport($('.carousel-item.active').find($('.itemId'))[0].innerText)" class="btn styledBtn m-1">False alarm</button>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/report.js" type="text/javascript"></script>
+}

@@ -27,17 +27,3 @@
 #modalInfo p {
     margin-bottom: 0;
 }
-
-.styledBtn {
-    background-color: #f38181;
-    color: #FEFAEC
-}
-
-    .styledBtn:active, .styledBtn:hover {
-        background-color: #f56868;
-        color: #FEFAEC;
-    }
-
-    .styledBtn:active {
-        box-shadow: 0 0 0 0.2rem rgba(243, 129, 129, 0.5);
-    }
