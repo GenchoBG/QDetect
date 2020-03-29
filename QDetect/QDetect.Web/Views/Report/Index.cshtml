@@ -6,7 +6,7 @@
 <h1 class="d-flex justify-content-center">@Model.ToList()[0].PersonName</h1>
 
 <div class="bd-example">
-    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <div id="carouselCaptions" class="carousel slide" data-ride="carousel">
         @if (Model.ToList().Count > 1)
         {
             <ol class="carousel-indicators">
@@ -17,15 +17,18 @@
             </ol>
         }
 
-        @for (var i = 0; i < Model.ToList().Count; i++)
-        {
-            <div class="carousel-item @(i == 0 ? "active" : null)">
-                <img src="@Model.ToList()[i].ImageLink" class="d-block w-50" alt="report">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>@Model.ToList()[i].TimeTaken</h5>
+        <div class="carousel-inner">
+            @for (var i = 0; i < Model.ToList().Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : null)">
+                    <img src="@Model.ToList()[i].ImageLink" class="d-block w-100" alt="report">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model.ToList()[i].TimeTaken</h5>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+
         @if (Model.ToList().Count > 1)
         {
             <a class="carousel-control-prev" href="#carouselCaptions" role="button" data-slide="prev">
