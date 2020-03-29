@@ -2,18 +2,21 @@
     if ($(".carousel-item").length === 0) {
         clearNodes();
     }
+
+    $("button").on("click", () => {
+        if ($(".carousel-item").length === 0) {
+            clearNodes();
+        }
+    });
 });
 
 function clearNodes() {
-    $(".bd-carousel").children().remove();
+    $(".bd-carousel").empty();
     $("#controls").remove();
     $(".bd-carousel").append($("<h1 class='text-center'>There are no reports for this person!</h1>"));
 }
 
 function deleteReport(id) {
-    console.log(id);
-    console.log("Deleting...");
-
     $.ajax({
         method: "post",
         url: '/Report/Delete?id=' + id,
@@ -21,10 +24,12 @@ function deleteReport(id) {
         contentType: false,
         cache: false,
         success: function () {
-            console.log("SUCCESS");
-            if ($(".carousel-item").length > 0) {
-                let deleteIndicator = $(`#carousel-item-${id}`).find($("#indicatorId"))[0].innerText;
-                $(`carousel-indicator-${deleteIndicator}`).remove();
+            if ($(".carousel-inner").children().length > 1) {
+                let deleteIndicator = $(".carousel-inner").children().index($(`#carousel-item-${id}`));
+                console.log(deleteIndicator);
+                $(".carousel-indicators").children()[deleteIndicator].remove();
+
+                console.log($(`#carousel-item-${id}`));
                 $(`#carousel-item-${id}`).remove();
                 $($(".carousel-item")[0]).addClass("active");
             } else {
@@ -46,7 +51,6 @@ function deleteReport(id) {
 }
 
 function archiveReport(id) {
-    console.log("Archiving...");
     $.ajax({
         method: "post",
         url: '/Report/Archive?id=' + id,
@@ -54,12 +58,21 @@ function archiveReport(id) {
         contentType: false,
         cache: false,
         success: function () {
-            console.log("SUCCESS");
             if ($(".carousel-item").length > 0) {
+                let deleteIndicator = $(".carousel-inner").children().index($(`#carousel-item-${id}`));
+                console.log(deleteIndicator);
+                $(".carousel-indicators").children()[deleteIndicator].remove();
+
+                console.log($(`#carousel-item-${id}`));
                 $(`#carousel-item-${id}`).remove();
                 $($(".carousel-item")[0]).addClass("active");
             } else {
                 clearNodes();
+            }
+
+            if ($(".carousel-item").length === 1) {
+                $(".carousel-control-prev").remove();
+                $(".carousel-control-next").remove();
             }
         },
         error: function (req, status, err) {
