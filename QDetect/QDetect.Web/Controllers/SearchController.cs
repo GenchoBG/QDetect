@@ -31,7 +31,7 @@ namespace QDetect.Web.Controllers
                 {
                     Name = person.Name,
                     City = person.City,
-                    HasReports = person.Reports.Count > 0,
+                    HasReports = person.Reports.Any(r => !r.IsArchived),
                     Id = person.Id,
                     Image = this.peopleService.GetPersonImageLink(person.Id).Result,
                     QuarantineEndDate = person.QuarantineEndDate.ToLongDateString(),
@@ -56,7 +56,7 @@ namespace QDetect.Web.Controllers
                 {
                     Name = person.Name,
                     City = person.City,
-                    HasReports = person.Reports.Count > 0,
+                    HasReports = person.Reports.Any(r => !r.IsArchived),
                     Id = person.Id,
                     Image = this.peopleService.GetPersonImageLink(person.Id).Result,
                     QuarantineEndDate = person.QuarantineEndDate.ToShortTimeString(),
