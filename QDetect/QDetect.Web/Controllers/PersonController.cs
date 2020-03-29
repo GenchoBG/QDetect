@@ -58,7 +58,7 @@ namespace QDetect.Web.Controllers
             {
                 Id = person.Id,
                 City = person.City,
-                HasReports = person.Reports.Any(),
+                HasReports = person.Reports.Any(r => !r.IsArchived),
                 Image = await this.peopleService.GetPersonImageLink(person.Id),
                 Name = person.Name,
                 QuanratineEndDate = person.QuarantineEndDate.ToLocalTime().ToLongDateString(),
