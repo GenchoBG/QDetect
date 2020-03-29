@@ -35,7 +35,9 @@ namespace QDetect.Web.Controllers
                 reportsModel.Add(new ReportViewModel()
                 {
                     Id = report.Id,
-                    ImageLink = report.Image.Link
+                    PersonName = report.Person.Name,
+                    ImageLink = report.Image.Link,
+                    TimeTaken = report.Date
                 });
             }
 

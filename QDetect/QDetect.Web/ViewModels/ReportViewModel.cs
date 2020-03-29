@@ -8,6 +8,11 @@ namespace QDetect.Web.ViewModels
     public class ReportViewModel
     {
         public int Id { get; set; }
+
+        public string PersonName { get; set; }
+
         public string ImageLink { get; set; }
+
+        public DateTime TimeTaken { get; set; }
     }
 }
